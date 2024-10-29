@@ -25,4 +25,5 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     # Get the port from the environment variable
-    uvicorn.run(asgi_app)
+    port = int(os.environ.get("PORT", 8012))
+    uvicorn.run(asgi_app, port=port)
