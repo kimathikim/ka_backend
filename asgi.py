@@ -17,7 +17,5 @@ app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(contact_bp, url_prefix="/contact")
 
 
-if __name__ == "__main__":
-    # Configure logging
-    logging.basicConfig(level=logging.INFO)
-    asgi_app = WsgiToAsgi(app)
+logging.basicConfig(level=logging.INFO)
+asgi_app = WsgiToAsgi(app)
