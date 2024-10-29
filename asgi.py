@@ -1,3 +1,4 @@
+import os
 from routes.contact import contact_bp
 from routes.auth import auth_bp
 import logging
@@ -12,7 +13,6 @@ app.config.from_object(Config)
 client = MongoClient(app.config["MONGO_URI"])
 db = client.get_default_database()
 
-
 app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(contact_bp, url_prefix="/contact")
 
@@ -23,4 +23,6 @@ if __name__ == "__main__":
 
     # Configure logging
     logging.basicConfig(level=logging.INFO)
-    uvicorn.run(asgi_app, host="0.0.0.0", port=8012)
+
+    # Get the port from the environment variable
+    uvicorn.run(asgi_app)
