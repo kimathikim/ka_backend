@@ -1,21 +1,24 @@
+from flask import Flask
+from flask_cors import CORS
+from pymongo import MongoClient
+from asgiref.wsgi import WsgiToAsgi
+import logging
+
 from routes.contact import contact_bp
 from routes.auth import auth_bp
-import logging
-from flask import Flask
-from pymongo import MongoClient
 from config import Config
-from asgiref.wsgi import WsgiToAsgi
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
+# Configure CORS to allow all origins
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 client = MongoClient(app.config["MONGO_URI"])
 db = client.get_default_database()
-
-
 app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(contact_bp, url_prefix="/contact")
 
-
 logging.basicConfig(level=logging.INFO)
+
 asgi_app = WsgiToAsgi(app)
