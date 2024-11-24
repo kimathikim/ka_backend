@@ -1,4 +1,5 @@
 bcrypt==4.2.0
+Flask-Cors==5.0.0
 dnspython==1.16.0
 asgiref==3.8.1
 click==8.1.7
@@ -13,3 +14,4 @@ Werkzeug==0.16.1
 jinja2==3.0.3
 itsdangerous==2.0.1
 uvicorn==0.31.0
+
