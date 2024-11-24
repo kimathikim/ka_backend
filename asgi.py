@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_cors import CORS
 from pymongo import MongoClient
 from asgiref.wsgi import WsgiToAsgi
 import logging
@@ -12,7 +11,6 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Configure CORS to allow all origins
-CORS(app, resources={r"/*": {"origins": "*"}})
 
 client = MongoClient(app.config["MONGO_URI"])
 db = client.get_default_database()
