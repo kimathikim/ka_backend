@@ -1,1 +1,2 @@
-web: uvicorn asgi:asgi_app
+web: gunicorn asgi:asgi_app
+
