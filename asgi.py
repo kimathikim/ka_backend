@@ -1,6 +1,5 @@
 from flask import Flask
 from pymongo import MongoClient
-from asgiref.wsgi import WsgiToAsgi
 import logging
 
 from routes.contact import contact_bp
@@ -19,4 +18,4 @@ app.register_blueprint(contact_bp, url_prefix="/contact")
 
 logging.basicConfig(level=logging.INFO)
 
-asgi_app = WsgiToAsgi(app)
+asgi_app = app
