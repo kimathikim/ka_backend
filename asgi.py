@@ -1,5 +1,6 @@
 from flask import Flask
 from pymongo import MongoClient
+from flask_cors import CORS
 import logging
 
 from routes.contact import contact_bp
@@ -10,6 +11,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Configure CORS to allow all origins
+CORS(app)
 
 client = MongoClient(app.config["MONGO_URI"])
 db = client.get_default_database()
