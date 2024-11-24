@@ -20,4 +20,3 @@ app.register_blueprint(contact_bp, url_prefix="/contact")
 logging.basicConfig(level=logging.INFO)
 
 asgi_app = WsgiToAsgi(app)
-
