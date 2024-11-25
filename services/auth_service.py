@@ -12,12 +12,14 @@ class AuthService:
         if db.users.find_one({"email": user_data["email"]}):
             return {"success": False, "message": "Email already exists"}
 
-        user = User(user_data["username"], user_data["email"], user_data["password"])
+        user = User(user_data["username"],
+                    user_data["email"], user_data["password"])
         db.users.insert_one(user.to_dict())
         return {"success": True, "message": "User registered successfully"}
 
     def login_user(self, login_data):
-        user_data = db.users.find_one({"username": login_data["username"]})
+        user_data = db.users.find_one(
+            {login_data["username"]: login_data["username"]})
         if not user_data:
             return {"success": False, "message": "User not found"}
 

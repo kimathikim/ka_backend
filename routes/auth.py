@@ -16,6 +16,7 @@ def register():
 @auth_bp.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
+    print(data)
     result = auth_service.login_user(data)
     return jsonify(result), 200 if result["success"] else 401
 
