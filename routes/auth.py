@@ -10,7 +10,7 @@ auth_service = AuthService()
 def register():
     data = request.get_json()
     result = auth_service.register_user(data)
-    return jsonify(result), 201 if result["success"] else 400
+    return jsonify(result), 201
 
 
 @auth_bp.route("/login", methods=["POST"])
@@ -18,7 +18,7 @@ def login():
     data = request.get_json()
     print(data)
     result = auth_service.login_user(data)
-    return jsonify(result), 200 if result["success"] else 401
+    return jsonify(result), 200
 
 
 @auth_bp.route("/forgot-password", methods=["POST"])
