@@ -12,9 +12,10 @@ class ContactService:
         return {"success": True, "message": "Contact added successfully"}
 
     def search_contact(self, registration_number):
-        contact = db.contacts.find_one({"registrationNumber": registration_number})
+        contact = db.contacts.find_one(
+            {"registrationNumber": registration_number})
+        print(contact)
         if contact:
             contact["_id"] = str(contact["_id"])  # Convert ObjectId to string
             return {"success": True, "contact": contact}
         return {"success": False, "message": "Contact not found"}
-
