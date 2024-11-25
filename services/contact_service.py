@@ -3,7 +3,9 @@ from app import db
 
 class ContactService:
     def add_contact(self, contact_data):
-        if db.contacts.find_one(contact_data["registration_number"]):
+        if db.contacts.find_one(
+            {"registrationNumber": contact_data["registration_number"]}
+        ):
             return {"success": False, "message": "Registration number already exists"}
 
         db.contacts.insert_one(contact_data)
@@ -15,3 +17,4 @@ class ContactService:
             contact["_id"] = str(contact["_id"])  # Convert ObjectId to string
             return {"success": True, "contact": contact}
         return {"success": False, "message": "Contact not found"}
+
