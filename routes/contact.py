@@ -1,3 +1,4 @@
+from os import register_at_fork
 from flask import Blueprint, request, jsonify
 from services.contact_service import ContactService
 
@@ -15,5 +16,6 @@ def add_contact():
 @contact_bp.route("/search", methods=["GET"])
 def search_contact():
     registration_number = request.args.get("registrationNumber")
+    print(registration_number)
     result = contact_service.search_contact(registration_number)
     return jsonify(result), 200
