@@ -12,8 +12,7 @@ class AuthService:
         if db.users.find_one({"email": user_data["email"]}):
             return {"success": False, "message": "Email already exists"}
 
-        user = User(user_data["username"],
-                    user_data["email"], user_data["password"])
+        user = User(user_data["username"], user_data["email"], user_data["password"])
         db.users.insert_one(user.to_dict())
         return {"success": True, "message": "User registered successfully"}
 
@@ -21,6 +20,9 @@ class AuthService:
         user_data = db.users.find_one({"username": login_data["username"]})
         if not user_data:
             return {"success": False, "message": "User not found"}
+
+        if "password" not in login_data:
+            return {"success": False, "message": "Password is required"}
 
         user = User.from_dict(user_data)
         if user.check_password(login_data["password"]):
@@ -32,6 +34,7 @@ class AuthService:
                 current_app.config["JWT_SECRET_KEY"],
             )
             return {"success": True, "token": token}
+
         return {"success": False, "message": "Invalid password"}
 
     def user_exists(self, email):
