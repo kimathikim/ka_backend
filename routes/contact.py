@@ -14,6 +14,6 @@ def add_contact():
 
 @contact_bp.route("/search", methods=["GET"])
 def search_contact():
-    registration_number = request.args.get("registration_number")
+    registration_number = request.args.get("registrationNumber")
     result = contact_service.search_contact(registration_number)
     return jsonify(result), 200
